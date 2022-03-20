@@ -1,0 +1,13 @@
+
+version: 1
+
+models:
+    - name: correct_date_column_format
+      description: "Changing date column from string to timestamp format"
+      columns:
+          - name: id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+

@@ -1,0 +1,24 @@
+
+/*
+    Welcome to your first dbt model!
+    Did you know that you can also configure models directly within SQL files?
+    This will override configurations stated in dbt_project.yml
+
+    Try changing "table" to "view" below
+*/
+
+{{ config(materialized='table') }}
+
+CREATE TABLE INTERVIEW_DB.PLAYGROUND_RICHARD_MARTIN.COVID_19_INDONESIA_RICHARD_MARTIN
+LIKE FIVETRAN_INTERVIEW_DB.GOOGLE_SHEETS.COVID_19_INDONESIA_RICHARD_MARTIN;
+
+ALTER TABLE INTERVIEW_DB.PLAYGROUND_RICHARD_MARTIN.COVID_19_INDONESIA_RICHARD_MARTIN
+ADD new_timestamp timestamp;
+
+INSERT INTO INTERVIEW_DB.PLAYGROUND_RICHARD_MARTIN.COVID_19_INDONESIA_RICHARD_MARTIN
+(select *, CAST(DATE as timestamp) as new_timestamp from 
+FIVETRAN_INTERVIEW_DB.GOOGLE_SHEETS.COVID_19_INDONESIA_RICHARD_MARTIN);
+
+ALTER TABLE INTERVIEW_DB.PLAYGROUND_RICHARD_MARTIN.COVID_19_INDONESIA_RICHARD_MARTIN
+DROP DATE;
+
